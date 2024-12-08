@@ -8,7 +8,8 @@ namespace TeduBlog.Core.Domain.Content
     [Index(nameof(Slug), IsUnique = true)]
     public class PostCategory
     {
-        [Key] public Guid Id { get; set; }
+        [Key]
+        public Guid Id { get; set; }
         [MaxLength(250)]
         public required string Name { get; set; }
         [Column(TypeName = "varchar(250)")]

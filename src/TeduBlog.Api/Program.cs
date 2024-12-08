@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TeduBlog.Core.Identity;
 using TeduBlog.Data;
@@ -11,7 +11,6 @@ var connectionString = configuration.GetConnectionString("DefaultConnection");
 // Add services to the container.
 
 //Config DB Context and ASP.NET Core Identity
-// Add services to the container
 builder.Services.AddDbContext<TeduBlogContext>(options =>
                 options.UseSqlServer(connectionString));
 
@@ -21,17 +20,17 @@ builder.Services.AddIdentity<AppUser, AppRole>(options => options.SignIn.Require
 builder.Services.Configure<IdentityOptions>(options =>
 {
     //Password settings.
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 6;
-    options.Password.RequiredUniqueChars = 1;
+    options.Password.RequireDigit = true;// yêu cầu số
+    options.Password.RequireLowercase = true;// yêu cầu chữ thường
+    options.Password.RequireNonAlphanumeric = true;//yêu cầu ký tự đặc biệt
+    options.Password.RequireUppercase = true;//yêu cầu chữ hoa
+    options.Password.RequiredLength = 6;//yêu cầu độ dài tối thiểu
+    options.Password.RequiredUniqueChars = 1;//số lượng Unichar
 
     //Lockout settings.
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    options.Lockout.MaxFailedAccessAttempts = 5;
-    options.Lockout.AllowedForNewUsers = true;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);//thời gian log out tài khoản
+    options.Lockout.MaxFailedAccessAttempts = 5;// đăng nhập bao lâu thì log out
+    options.Lockout.AllowedForNewUsers = true;//cho phép lưu thông tin tk user
 
     //User settings.
     options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
@@ -39,6 +38,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 });
 
+//Default config for Asp.Net Core
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

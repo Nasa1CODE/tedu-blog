@@ -36,7 +36,7 @@ namespace TeduBlog.Core.Domain.Content
         public DateTime? DateCreated { get; set; }
         public DateTime? DateModified { get; set; }
         public bool IsPaid { get; set; }
-        public decimal? RoyaltyAmount { get; set; }
+        public long RoyaltyAmount { get; set; }
         public PostStatus Status { get; set; }
     }
 

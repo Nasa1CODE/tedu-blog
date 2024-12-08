@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using TeduBlog.Core.Domain.Content;
 using TeduBlog.Core.Identity;
 
@@ -24,15 +25,19 @@ namespace TeduBlog.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims").HasKey(t => t.Id);
+         
+            builder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims").HasKey(x => x.Id);
 
             builder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims").HasKey(x => x.Id);
 
             builder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
 
-            builder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new {x.RoleId, x.UserId});
+            builder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.RoleId, x.UserId });
 
             builder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => new { x.UserId });
+            builder.Entity<AppUser>().Property(u => u.Balance).HasPrecision(18, 2);
+            builder.Entity<AppUser>().Property(u => u.Balance).HasPrecision(18, 2);
+
         }
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
